@@ -1,4 +1,4 @@
-// Write your JavaScript code here!
+const { pickPlanet } = require("./scriptHelper");
 
 window.addEventListener("load", function () {
   document.getElementById("formSubmit").addEventListener("click", (event) => {
@@ -19,9 +19,9 @@ window.addEventListener("load", function () {
     event.preventDefault();
   });
 
-  let listedPlanets;
+  let listedPlanets = myFetch();
   // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-  let listedPlanetsResponse;
+  // let listedPlanetsResponse = myFetch(planetsReturned);
   listedPlanetsResponse
     .then(function (result) {
       listedPlanets = result;
@@ -30,5 +30,6 @@ window.addEventListener("load", function () {
     .then(function () {
       console.log(listedPlanets);
       // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+      // pickPlanet(listedPlanets);
     });
 });

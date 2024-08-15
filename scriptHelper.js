@@ -12,7 +12,11 @@ function addDestinationInfo(
   imageUrl
 ) {
   // Here is the HTML formatting for our mission target div.
-  /*
+  //  let index= 0 , do i call the pickPlanet here? do i use listedPlanets as the key.value pair, the the random planet pick being called here? or in script?
+  let missionTarget = document.getElementById("missionTarget");
+  missionTarget.innerHTML = `
+  
+  
                  <h2>Mission Destination</h2>
                  <ol>
                      <li>Name: </li>
@@ -21,8 +25,7 @@ function addDestinationInfo(
                      <li>Distance from Earth: </li>
                      <li>Number of Moons: </li>
                  </ol>
-                 <img src="">
-    */
+                 <img src="">`;
 }
 
 function validateInput(testInput) {
@@ -94,15 +97,21 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 }
 
 async function myFetch() {
-  let planetsReturned;
+  let response = await fetch(
+    "https://handlers.education.launchcode.org/static/planets.json"
+  );
+  let data = await response.json();
 
-  planetsReturned = await fetch().then(function (response) {});
-  // "https://handlers.education.launchcode.org/static/planets.json"
-
-  return planetsReturned;
+  for (let i = 0; i < data.length; i++) {
+    let planetsReturned = data;
+    return planetsReturned;
+  }
 }
 
-function pickPlanet(planets) {}
+function pickPlanet(planets) {
+  let index = Math.floor(Math.random() * planets.length);
+  return planets[index];
+}
 
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
