@@ -41,10 +41,16 @@ function validateInput(testInput) {
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+  let pilotStatus = document.getElementById("pilotStatus");
+  let copilotStatus = document.getElementById("copilotStatus");
+  let fuelStatus = document.getElementById("fuelStatus");
+  let launchStatus = document.getElementById("launchStatus");
+  let cargoStatus = document.getElementById("cargoStatus");
+
   if (
-    validateInput(pilot) === "Empty" ||
-    validateInput(copilot) === "Empty" ||
-    validateInput(fuelLevel) === "Empty" ||
+    validateInput(pilot) === "Empty" &&
+    validateInput(copilot) === "Empty" &&
+    validateInput(fuelLevel) === "Empty" &&
     validateInput(cargoLevel) === "Empty"
   ) {
     alert("All fields are required!");
@@ -57,14 +63,11 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   } else if (validateInput(cargoLevel) === "Not a Number") {
     alert("Please enter a number for 'Cargo Mass'");
   }
-
-  let pilotStatus = document.getElementById("pilotStatus");
-  let copilotStatus = document.getElementById("copilotStatus");
-  let fuelStatus = document.getElementById("fuelStatus");
-  let launchStatus = document.getElementById("launchStatus");
-  let cargoStatus = document.getElementById("cargoStatus");
-
-  if (fuelLevel < 10000) {
+  if (pilot === "" || copilot === "" || fuelLevel === "" || cargoLevel === "") {
+    launchStatus.style.color = "red";
+    launchStatus.innerHTML = "Information Required";
+    list.style.visibility = "hidden";
+  } else if (fuelLevel < 10000) {
     list.style.visibility = "visible";
     launchStatus.style.color = "red";
     launchStatus.innerHTML = "Shuttle Not Ready for Launch.";
@@ -103,12 +106,6 @@ async function myFetch() {
   );
   let planetsReturned = await response.json();
   return planetsReturned;
-  // let data = await response.json();
-
-  // for (let i = 0; i < data.length; i++) {
-  //   let planetsReturned = data;
-  //   return planetsReturned;
-  // }
 }
 
 function pickPlanet(planets) {
