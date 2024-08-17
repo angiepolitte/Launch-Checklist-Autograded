@@ -1,5 +1,3 @@
-const { pickPlanet } = require("./scriptHelper");
-
 window.addEventListener("load", function () {
   document.getElementById("formSubmit").addEventListener("click", (event) => {
     let pilot = document.querySelector("input[name=pilotName]");
@@ -19,9 +17,9 @@ window.addEventListener("load", function () {
     event.preventDefault();
   });
 
-  let listedPlanets = myFetch();
+  let listedPlanets;
   // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-  // let listedPlanetsResponse = myFetch(planetsReturned);
+  let listedPlanetsResponse = myFetch();
   listedPlanetsResponse
     .then(function (result) {
       listedPlanets = result;
@@ -30,6 +28,6 @@ window.addEventListener("load", function () {
     .then(function () {
       console.log(listedPlanets);
       // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
-      // pickPlanet(listedPlanets);
+      pickPlanet(listedPlanets);
     });
 });

@@ -9,8 +9,9 @@ function addDestinationInfo(
   star,
   distance,
   moons,
-  imageUrl
+  image
 ) {
+  // let chosenPlanet = pickPlanet(myFetch(index));
   // Here is the HTML formatting for our mission target div.
   //  let index= 0 , do i call the pickPlanet here? do i use listedPlanets as the key.value pair, the the random planet pick being called here? or in script?
   let missionTarget = document.getElementById("missionTarget");
@@ -19,13 +20,13 @@ function addDestinationInfo(
   
                  <h2>Mission Destination</h2>
                  <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
+                     <li>Name: ${name}</li>
+                     <li>Diameter: ${diameter}</li>
                      <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
+                     <li>Distance from Earth: ${distance}</li>
+                     <li>Number of Moons: ${moons}</li>
                  </ol>
-                 <img src="">`;
+                 <img src='${image}'>`;
 }
 
 function validateInput(testInput) {
@@ -100,17 +101,19 @@ async function myFetch() {
   let response = await fetch(
     "https://handlers.education.launchcode.org/static/planets.json"
   );
-  let data = await response.json();
+  let planetsReturned = await response.json();
+  return planetsReturned;
+  // let data = await response.json();
 
-  for (let i = 0; i < data.length; i++) {
-    let planetsReturned = data;
-    return planetsReturned;
-  }
+  // for (let i = 0; i < data.length; i++) {
+  //   let planetsReturned = data;
+  //   return planetsReturned;
+  // }
 }
 
 function pickPlanet(planets) {
-  let index = Math.floor(Math.random() * planets.length);
-  return planets[index];
+  let randomPlanet = planets[Math.floor(Math.random() * planets.length)];
+  return randomPlanet;
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
